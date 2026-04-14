@@ -239,7 +239,7 @@ export default function HomePage() {
           </div>
           <div className={styles.testimonialGrid}>
             {[
-              { name: 'Ananya S.', text: 'GlamCart has completely transformed my skincare routine. The products are authentic and the delivery is super fast!', rating: 5 },
+              { name: 'Ananya S.', text: 'Cosmique has completely transformed my skincare routine. The products are authentic and the delivery is super fast!', rating: 5 },
               { name: 'Riya M.', text: 'I love the curated collection. Every product I have ordered has been top quality. The Midnight Rose perfume is my absolute favorite!', rating: 5 },
               { name: 'Meera K.', text: 'Best beauty shopping experience online. The packaging is beautiful and the Hyaluronic Acid serum is a game changer for my skin.', rating: 5 }
             ].map((t, i) => (
@@ -256,7 +256,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className={styles.cta}>
         <div className={styles.container}>
-          <h2>Join the GlamCart Family</h2>
+          <h2>Join the Cosmique Family</h2>
           <p>Sign up for exclusive offers, beauty tips, and new product launches.</p>
           <div className={styles.ctaForm}>
             <input type="email" placeholder="Enter your email" className={styles.ctaInput} />

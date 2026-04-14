@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AppContext';
 import { useCart } from '@/context/AppContext';
 import { cartAPI } from '@/lib/api';
@@ -10,11 +11,17 @@ import styles from './Header.module.css';
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth();
   const { items, setCart } = useCart();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const profileRef = useRef(null);
+
+  useEffect(() => {
+    setSearchQuery(searchParams.get('search') || '');
+  }, [searchParams]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -41,7 +48,9 @@ export default function Header() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      window.location.href = `/products?search=${encodeURIComponent(searchQuery)}`;
+      router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+    } else {
+      router.push('/products');
     }
   };
 
@@ -78,16 +87,95 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className={styles.logo}>
             <span className={styles.logoIcon}>💎</span>
-            <span className={styles.logoText}>GlamCart</span>
+            <span className={styles.logoText}>Cosmique</span>
           </Link>
 
           {/* Navigation */}
           <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
             <Link href="/products" className={styles.navLink} onClick={() => setMenuOpen(false)}>All Products</Link>
+            
+            <div className={styles.navItem}>
+              <span className={styles.navLink}>Shop by Concern</span>
+              <div className={styles.megaMenu}>
+                <div className={styles.megaMenuColumn}>
+                  <h4>Skin Concerns</h4>
+                  <div className={styles.megaMenuList}>
+                    <Link href="/products?concern=acne" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🩹</span> Acne & Blemishes
+                    </Link>
+                    <Link href="/products?concern=aging" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>⌛</span> Anti-Aging
+                    </Link>
+                    <Link href="/products?concern=pigmentation" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>✨</span> Brightening & Pigmentation
+                    </Link>
+                    <Link href="/products?concern=dryness" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>💧</span> Dryness & Hydration
+                    </Link>
+                  </div>
+                </div>
+                <div className={styles.megaMenuColumn}>
+                  <h4>Specialized Care</h4>
+                  <div className={styles.megaMenuList}>
+                    <Link href="/products?concern=oil-control" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🌿</span> Oil Control
+                    </Link>
+                    <Link href="/products?concern=sensitive" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🛡️</span> Sensitive Skin
+                    </Link>
+                    <Link href="/products?concern=sun-protection" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>☀️</span> Sun Protection
+                    </Link>
+                    <Link href="/products?concern=pores" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🕳️</span> Large Pores
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.navItem}>
+              <span className={styles.navLink}>Shop by Ingredient</span>
+              <div className={styles.megaMenu}>
+                <div className={styles.megaMenuColumn}>
+                  <h4>The Actives</h4>
+                  <div className={styles.megaMenuList}>
+                    <Link href="/products?ingredient=vitamin-c" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🍊</span> Vitamin C
+                    </Link>
+                    <Link href="/products?ingredient=niacinamide" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🧬</span> Niacinamide
+                    </Link>
+                    <Link href="/products?ingredient=hyaluronic-acid" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🌊</span> Hyaluronic Acid
+                    </Link>
+                    <Link href="/products?ingredient=retinol" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🌙</span> Retinol
+                    </Link>
+                  </div>
+                </div>
+                <div className={styles.megaMenuColumn}>
+                  <h4>Natural Extracts</h4>
+                  <div className={styles.megaMenuList}>
+                    <Link href="/products?ingredient=salicylic-acid" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🧪</span> Salicylic Acid
+                    </Link>
+                    <Link href="/products?ingredient=tea-tree" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🍃</span> Tea Tree
+                    </Link>
+                    <Link href="/products?ingredient=aloe-vera" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🌵</span> Aloe Vera
+                    </Link>
+                    <Link href="/products?ingredient=ceramides" className={styles.megaMenuItem} onClick={() => setMenuOpen(false)}>
+                      <span className={styles.megaMenuIcon}>🧱</span> Ceramides
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <Link href="/products?category=skincare" className={styles.navLink} onClick={() => setMenuOpen(false)}>Skincare</Link>
             <Link href="/products?category=makeup" className={styles.navLink} onClick={() => setMenuOpen(false)}>Makeup</Link>
-            <Link href="/products?category=hair-care" className={styles.navLink} onClick={() => setMenuOpen(false)}>Hair Care</Link>
-            <Link href="/products?category=fragrances" className={styles.navLink} onClick={() => setMenuOpen(false)}>Fragrances</Link>
           </nav>
 
           {/* Search */}

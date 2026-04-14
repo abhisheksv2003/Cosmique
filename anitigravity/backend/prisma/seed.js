@@ -26,10 +26,10 @@ async function main() {
   const adminPassword = await bcrypt.hash('Admin@123', 12);
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@glamcart.com',
+      email: 'admin@cosmique.com',
       password: adminPassword,
       firstName: 'Admin',
-      lastName: 'GlamCart',
+      lastName: 'Cosmique',
       role: 'ADMIN',
       isVerified: true
     }
@@ -147,7 +147,7 @@ async function main() {
         ingredients: 'Hyaluronic Acid, Niacinamide, Vitamin E, Aloe Vera, Glycerin',
         howToUse: 'Apply 2-3 drops on clean, damp skin. Follow with moisturizer.',
         isFeatured: true,
-        tags: ['hydrating', 'anti-aging', 'serum', 'bestseller'],
+        tags: ['hydrating', 'aging', 'serum', 'bestseller', 'hyaluronic-acid', 'dryness'],
         avgRating: 4.5,
         reviewCount: 128,
         categoryId: categories[0].id,
@@ -172,7 +172,7 @@ async function main() {
         ingredients: 'Vitamin C (L-Ascorbic Acid), Turmeric Extract, Saffron, Shea Butter',
         howToUse: 'Apply evenly on face and neck after serum. Use morning and night.',
         isFeatured: true,
-        tags: ['brightening', 'vitamin-c', 'cream', 'dark-spots'],
+        tags: ['brightening', 'vitamin-c', 'cream', 'dark-spots', 'pigmentation'],
         avgRating: 4.3,
         reviewCount: 95,
         categoryId: categories[0].id,
@@ -196,7 +196,7 @@ async function main() {
         ingredients: 'Retinol 0.5%, Peptides, Squalane, Vitamin E, Jojoba Oil',
         howToUse: 'Apply at night after cleansing. Start with 2-3 times per week.',
         isFeatured: true,
-        tags: ['retinol', 'anti-aging', 'night-care', 'premium'],
+        tags: ['retinol', 'aging', 'night-care', 'premium', 'niacinamide'],
         avgRating: 4.7,
         reviewCount: 72,
         categoryId: categories[0].id,
@@ -526,7 +526,7 @@ async function main() {
 
   console.log('✅ Seed completed!');
   console.log('\n📋 Login Credentials:');
-  console.log('Admin: admin@glamcart.com / Admin@123');
+  console.log('Admin: admin@cosmique.com / Admin@123');
   console.log('Customer: customer@test.com / Customer@123');
 }
 

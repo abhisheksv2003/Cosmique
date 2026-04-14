@@ -40,14 +40,14 @@ export default function RegisterPage() {
       <div className={styles.authLeft}>
         <div className={styles.authOverlay}></div>
         <div className={styles.authBrandContent}>
-          <h2>Join GlamCart</h2>
+          <h2>Join Cosmique</h2>
           <p>Create your account and discover premium beauty products curated just for you.</p>
         </div>
       </div>
       <div className={styles.authRight}>
         <div className={styles.authForm}>
           <div className={styles.authHeader}>
-            <Link href="/" className={styles.authLogo}>💎 GlamCart</Link>
+            <Link href="/" className={styles.authLogo}>💎 Cosmique</Link>
             <h1>Create Account</h1>
             <p>Fill in your details to get started</p>
           </div>

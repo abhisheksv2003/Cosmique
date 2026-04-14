@@ -59,6 +59,8 @@
 /* Images */
 .imageSection {
   display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .mainImage {
@@ -118,6 +120,7 @@
 /* Info */
 .infoSection {
   display: flex;
+  flex-direction: column;
 }
 
 .brand {
@@ -133,6 +136,8 @@
 .productName {
   font-size: 1.875rem;
   margin-bottom: var(--space-md);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .ratingRow {
@@ -172,6 +177,8 @@
   line-height: 1.7;
   margin-bottom: var(--space-xl);
   font-size: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .priceSection {
@@ -452,5 +459,103 @@
 
   .tab {
     white-space: nowrap;
+  }
+}
+
+/* Enhanced Transparency & Routine Styles */
+.ingredientsTab, .usageTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.ingredientList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ingredientBadge {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--gray-200);
+}
+
+.transparencyNote {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  background: var(--info-bg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  color: var(--info);
+  font-size: 0.9375rem;
+}
+
+.transparencyIcon {
+  font-size: 1.5rem;
+}
+
+.routineGuide {
+  background: var(--gray-50);
+  padding: var(--space-xl);
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--gray-300);
+}
+
+.routineGuide h4 {
+  margin-bottom: var(--space-lg);
+  font-size: 1.125rem;
+  color: var(--secondary);
+}
+
+.routineSteps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding-bottom: var(--space-sm);
+}
+
+.step {
+  flex: 1;
+  min-width: 120px;
+  padding: var(--space-md);
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  position: relative;
+}
+
+.stepDone {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.stepActive {
+  background: var(--primary-bg);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .routineSteps {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .step {
+    min-width: 0;
   }
 }

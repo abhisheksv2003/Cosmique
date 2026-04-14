@@ -1,0 +1,186 @@
+.aboutPage {
+  padding-bottom: var(--space-4xl);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Hero Section */
+.hero {
+  padding: var(--space-4xl) 0;
+  background: linear-gradient(to bottom, var(--primary-bg) 0%, var(--white) 100%);
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-xl);
+  line-height: 1.1;
+}
+
+.hero h1 span {
+  color: var(--primary);
+}
+
+.heroText {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+
+/* Philosophy Section */
+.philosophy {
+  padding: var(--space-4xl) 0;
+}
+
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.philosophyContent p {
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.7;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.statItem h3 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.statItem p {
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.philosophyImage img {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Values Section */
+.values {
+  padding: var(--space-4xl) 0;
+  background-color: var(--gray-50);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+  margin-top: var(--space-3xl);
+}
+
+.valueCard {
+  background: var(--white);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.valueCard:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.valueIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.valueCard h3 {
+  margin-bottom: var(--space-md);
+  font-size: 1.25rem;
+}
+
+.valueCard p {
+  color: var(--gray-600);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Brand Section */
+.brandSection {
+  padding: var(--space-4xl) 0;
+  text-align: center;
+}
+
+.brandContent {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.brandContent h2 {
+  font-size: 2.25rem;
+  margin-bottom: var(--space-lg);
+}
+
+.brandContent p {
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .philosophyGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  
+  .philosophyImage {
+    order: -1;
+  }
+  
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats {
+    gap: var(--space-sm);
+  }
+  
+  .statItem h3 {
+    font-size: 1.5rem;
+  }
+}

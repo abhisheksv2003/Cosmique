@@ -42,7 +42,7 @@ export default function LoginPage() {
       <div className={styles.authRight}>
         <div className={styles.authForm}>
           <div className={styles.authHeader}>
-            <Link href="/" className={styles.authLogo}>💎 GlamCart</Link>
+            <Link href="/" className={styles.authLogo}>💎 Cosmique</Link>
             <h1>Sign In</h1>
             <p>Enter your credentials to continue</p>
           </div>
@@ -86,7 +86,7 @@ export default function LoginPage() {
             <div className={styles.demoGrid}>
               <button 
                 className={styles.demoBtn}
-                onClick={() => { setEmail('admin@glamcart.com'); setPassword('Admin@123'); }}
+                onClick={() => { setEmail('admin@cosmique.com'); setPassword('Admin@123'); }}
               >
                 👑 Admin Login
               </button>

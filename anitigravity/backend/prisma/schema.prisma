@@ -1,4 +1,4 @@
-// GlamCart E-Commerce - Prisma Schema
+// Cosmique E-Commerce - Prisma Schema
 // Beauty & Cosmetics Platform Database Design
 
 generator client {

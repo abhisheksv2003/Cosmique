@@ -15,6 +15,8 @@ function ProductsContent() {
   const [filters, setFilters] = useState({
     search: searchParams.get('search') || '',
     category: searchParams.get('category') || '',
+    concern: searchParams.get('concern') || '',
+    ingredient: searchParams.get('ingredient') || '',
     sort: searchParams.get('sort') || 'newest',
     minPrice: '',
     maxPrice: '',
@@ -25,6 +27,18 @@ function ProductsContent() {
   useEffect(() => {
     loadCategories();
   }, []);
+
+  useEffect(() => {
+    setFilters(prev => ({
+      ...prev,
+      search: searchParams.get('search') || '',
+      category: searchParams.get('category') || '',
+      concern: searchParams.get('concern') || '',
+      ingredient: searchParams.get('ingredient') || '',
+      featured: searchParams.get('featured') || '',
+      page: 1
+    }));
+  }, [searchParams]);
 
   useEffect(() => {
     loadProducts();
@@ -52,6 +66,8 @@ function ProductsContent() {
       const params = {};
       if (filters.search) params.search = filters.search;
       if (filters.category) params.category = filters.category;
+      if (filters.concern) params.concern = filters.concern;
+      if (filters.ingredient) params.ingredient = filters.ingredient;
       if (filters.sort) params.sort = filters.sort;
       if (filters.minPrice) params.minPrice = filters.minPrice;
       if (filters.maxPrice) params.maxPrice = filters.maxPrice;
@@ -88,7 +104,12 @@ function ProductsContent() {
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <div className={styles.container}>
-          <h1>{filters.category ? filters.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'All Products'}</h1>
+          <h1>
+            {filters.category ? filters.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 
+             filters.concern ? `Shop by Concern: ${filters.concern.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}` :
+             filters.ingredient ? `Shop by Ingredient: ${filters.ingredient.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}` :
+             'All Products'}
+          </h1>
           {filters.search && <p>Search results for &ldquo;{filters.search}&rdquo;</p>}
         </div>
       </div>
@@ -161,9 +182,16 @@ function ProductsContent() {
             <div className={styles.main}>
               {/* Toolbar */}
               <div className={styles.toolbar}>
-                <span className={styles.resultCount}>
-                  {pagination.total || products.length} products found
-                </span>
+                <div className={styles.searchBox}>
+                  <input
+                    type="text"
+                    placeholder="Search within these products..."
+                    value={filters.search}
+                    onChange={(e) => updateFilter('search', e.target.value)}
+                    className={styles.searchInput}
+                  />
+                  <span className={styles.searchIcon}>🔍</span>
+                </div>
                 <div className={styles.sortWrapper}>
                   <label>Sort by:</label>
                   <select

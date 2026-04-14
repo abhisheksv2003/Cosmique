@@ -4,8 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'GlamCart - Premium Beauty & Cosmetics',
-  description: 'Discover the best in skincare, makeup, haircare, and fragrances. Shop premium beauty products at GlamCart.',
+  title: 'Cosmique - Premium Beauty & Cosmetics',
+  description: 'Discover the best in skincare, makeup, haircare, and fragrances. Shop premium beauty products at Cosmique.',
   keywords: 'beauty, cosmetics, skincare, makeup, haircare, fragrances, online shopping',
 };
 

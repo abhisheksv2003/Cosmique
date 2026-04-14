@@ -1,4 +1,4 @@
-# 💎 GlamCart — Beauty & Cosmetics E-Commerce Platform
+# 💎 Cosmique — Beauty & Cosmetics E-Commerce Platform
 
 A production-ready, full-stack beauty & cosmetics e-commerce platform.
 
@@ -17,7 +17,7 @@ A production-ready, full-stack beauty & cosmetics e-commerce platform.
 ## 📁 Project Structure
 
 ```
-glamcart/
+cosmique/
 ├── backend/
 │   ├── prisma/
 │   │   ├── schema.prisma          # Database schema
@@ -109,7 +109,7 @@ npm run dev
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@glamcart.com | Admin@123 |
+| Admin | admin@cosmique.com | Admin@123 |
 | Customer | customer@test.com | Customer@123 |
 
 ## 📡 API Endpoints

@@ -13,7 +13,7 @@ export default function Footer() {
             <div className={styles.brand}>
               <Link href="/" className={styles.logo}>
                 <span>💎</span>
-                <span className={styles.logoText}>GlamCart</span>
+                <span className={styles.logoText}>Cosmique</span>
               </Link>
               <p className={styles.brandDesc}>
                 Your destination for premium beauty & cosmetics. 
@@ -32,10 +32,10 @@ export default function Footer() {
               <h4 className={styles.columnTitle}>Quick Links</h4>
               <ul className={styles.links}>
                 <li><Link href="/products">All Products</Link></li>
+                <li><Link href="/about">About Us</Link></li>
+                <li><Link href="/contact">Contact Us</Link></li>
                 <li><Link href="/products?category=skincare">Skincare</Link></li>
                 <li><Link href="/products?category=makeup">Makeup</Link></li>
-                <li><Link href="/products?category=hair-care">Hair Care</Link></li>
-                <li><Link href="/products?category=fragrances">Fragrances</Link></li>
               </ul>
             </div>
 
@@ -67,7 +67,7 @@ export default function Footer() {
 
       <div className={styles.footerBottom}>
         <div className={styles.container}>
-          <p>© 2026 GlamCart. All rights reserved. Made with 💕</p>
+          <p>© 2026 Cosmique. All rights reserved. Made with 💕</p>
           <div className={styles.bottomLinks}>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

@@ -258,10 +258,47 @@ export default function ProductDetailPage({ params }) {
               </div>
             )}
             {activeTab === 'ingredients' && (
-              <p>{product.ingredients || 'Ingredients information will be available soon.'}</p>
+              <div className={styles.ingredientsTab}>
+                {product.ingredients ? (
+                  <>
+                    <div className={styles.ingredientList}>
+                      {product.ingredients.split(',').map((item, idx) => (
+                        <div key={idx} className={styles.ingredientBadge}>
+                          {item.trim()}
+                        </div>
+                      ))}
+                    </div>
+                    <div className={styles.transparencyNote}>
+                      <span className={styles.transparencyIcon}>🔬</span>
+                      <p><strong>Science-Backed Formulation:</strong> We prioritize transparency. All ingredients used are dermatologically tested and chosen for their efficacy and safety profile.</p>
+                    </div>
+                  </>
+                ) : (
+                  <p>Ingredients information will be available soon.</p>
+                )}
+              </div>
             )}
             {activeTab === 'how-to-use' && (
-              <p>{product.howToUse || 'Usage instructions will be available soon.'}</p>
+              <div className={styles.usageTab}>
+                {product.howToUse ? (
+                  <>
+                    <div className={styles.usageInstructions}>
+                      <p>{product.howToUse}</p>
+                    </div>
+                    <div className={styles.routineGuide}>
+                      <h4>Routine Step</h4>
+                      <div className={styles.routineSteps}>
+                        <div className={`${styles.step} ${styles.stepDone}`}>1. Cleanse</div>
+                        <div className={`${styles.step} ${styles.stepActive}`}>2. Treat ({product.name})</div>
+                        <div className={styles.step}>3. Moisturize</div>
+                        <div className={styles.step}>4. Protect (SPF)</div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <p>Usage instructions will be available soon.</p>
+                )}
+              </div>
             )}
             {activeTab === 'reviews' && (
               <div className={styles.reviewsSection}>

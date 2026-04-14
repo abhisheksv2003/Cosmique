@@ -1,4 +1,4 @@
-const email = 'admin@glamcart.com';
+const email = 'admin@cosmique.com';
 const password = 'Admin@123';
 fetch('http://localhost:5000/api/auth/login', {
   method: 'POST',

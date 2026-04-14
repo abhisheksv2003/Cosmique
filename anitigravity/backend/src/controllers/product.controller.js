@@ -5,7 +5,7 @@ const { slugify, getPagination, formatPaginationResponse } = require('../utils/h
 // Get all products (with filters, search, pagination)
 const getProducts = async (req, res, next) => {
   try {
-    const { page = 1, limit = 12, search, category, brand, minPrice, maxPrice, sort, featured, tag } = req.query;
+    const { page = 1, limit = 12, search, category, brand, minPrice, maxPrice, sort, featured, tag, concern, ingredient } = req.query;
     const { take, skip } = getPagination(page, limit);
 
     // Build where clause
@@ -21,6 +21,14 @@ const getProducts = async (req, res, next) => {
 
     if (category) {
       where.category = { slug: category };
+    }
+
+    if (concern) {
+      where.tags = { ...where.tags, has: concern.toLowerCase() };
+    }
+
+    if (ingredient) {
+      where.tags = { ...where.tags, has: ingredient.toLowerCase() };
     }
 
     if (brand) {
