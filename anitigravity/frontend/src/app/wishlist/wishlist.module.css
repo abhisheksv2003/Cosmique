@@ -1,0 +1,30 @@
+/* Wishlist Styles */
+.page { padding: var(--space-xl) 0 var(--space-4xl); animation: fadeIn 0.5s ease; }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-lg); }
+.container h1 { margin-bottom: var(--space-2xl); }
+.loading { text-align: center; padding: var(--space-4xl); color: var(--gray-500); }
+
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+
+.card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-base); }
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+
+.image { aspect-ratio: 3/4; overflow: hidden; display: block; }
+.image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+.card:hover .image img { transform: scale(1.05); }
+
+.info { padding: var(--space-md); }
+.brand { font-size: 0.75rem; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.name { font-weight: 600; font-size: 0.9375rem; display: block; margin: 4px 0 8px; color: var(--gray-800); }
+.name:hover { color: var(--primary); }
+.priceRow { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); }
+.price { font-weight: 700; color: var(--gray-900); }
+.mrp { font-size: 0.8125rem; color: var(--gray-400); text-decoration: line-through; }
+
+.actions { display: flex; gap: var(--space-sm); align-items: center; }
+.removeBtn { width: 36px; height: 36px; border-radius: var(--radius-full); border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-400); background: none; transition: all var(--transition-fast); }
+.removeBtn:hover { background: var(--error-bg); color: var(--error); border-color: var(--error); }
+
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
