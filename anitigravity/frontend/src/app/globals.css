@@ -84,6 +84,11 @@
   --max-width: 1280px;
   --header-height: 72px;
   --sidebar-width: 280px;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
 /* ========== Reset & Base ========== */
@@ -602,7 +607,53 @@ h4 { font-size: 1.25rem; }
   margin-bottom: var(--space-xl);
 }
 
-/* ========== Toast ========== */
+/* ========== Glassmorphism Utility ========== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Premium Backgrounds ========== */
+.bg-mesh {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 40% 20%, rgba(196, 121, 138, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(107, 45, 91, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(212, 168, 83, 0.05) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(196, 121, 138, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(107, 45, 91, 0.05) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, rgba(212, 168, 83, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, rgba(196, 121, 138, 0.1) 0px, transparent 50%);
+}
+
+.bg-premium-dark {
+  background: linear-gradient(135deg, #171717 0%, #0a0a0a 100%);
+}
+
+/* ========== Scroll Reveal ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Toast Customization ========== */
 .toast-container {
   font-family: var(--font-body) !important;
 }
+
+/* Existing styles below... */

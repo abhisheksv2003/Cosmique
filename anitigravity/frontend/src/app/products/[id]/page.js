@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AppContext';
 import { useCart } from '@/context/AppContext';
 import { productAPI, cartAPI, wishlistAPI, reviewAPI } from '@/lib/api';
 import styles from './detail.module.css';
+import toast from 'react-hot-toast';
 
 export default function ProductDetailPage({ params }) {
   const { id } = use(params);
@@ -69,9 +70,11 @@ export default function ProductDetailPage({ params }) {
       await cartAPI.addToCart({ productId: product.id, quantity });
       const { data } = await cartAPI.getCart();
       setCart(data);
-      alert('Added to cart!');
+      toast.success('Successfully added to cart!', {
+        icon: '🛒',
+      });
     } catch (err) {
-      alert(err.response?.data?.error || 'Failed to add to cart');
+      toast.error(err.response?.data?.error || 'Failed to add to cart');
     } finally {
       setAddingToCart(false);
     }
@@ -224,9 +227,9 @@ export default function ProductDetailPage({ params }) {
 
             {/* Features */}
             <div className={styles.features}>
-              <div className={styles.featureItem}>🚚 Free shipping on orders above ₹499</div>
-              <div className={styles.featureItem}>↩️ 30-day easy returns</div>
-              <div className={styles.featureItem}>✅ 100% authentic product</div>
+              <div className={styles.featureItem}>Free shipping on orders above ₹499</div>
+              <div className={styles.featureItem}>30-day easy returns</div>
+              <div className={styles.featureItem}>100% authentic product</div>
             </div>
           </div>
         </div>

@@ -71,23 +71,25 @@ cd ../frontend
 npm install
 ```
 
-### 2. Database Setup
+# 3. Collaborative Database (Neon Postgres)
+If you are working in a team, use [Neon](https://neon.tech) for a shared cloud database:
 
-```bash
-cd backend
+1. Create a project on Neon and copy the connection string.
+2. Update `backend/.env`:
+   ```env
+   DATABASE_URL="postgresql://user:password@shaggy-cloud-12345.aws.neon.tech/neondb?sslmode=require"
+   ```
+3. Push the schema and seed:
+   ```bash
+   cd backend
+   npx prisma db push
+   npm run prisma:seed
+   ```
 
-# Update DATABASE_URL in .env with your PostgreSQL credentials
-# Then run migrations
-npx prisma migrate dev --name init
+### 4. Local Database Setup (Alternative)
+...
 
-# Generate Prisma client
-npx prisma generate
-
-# Seed the database
-node prisma/seed.js
-```
-
-### 3. Start Development Servers
+### 5. Start Development Servers
 
 ```bash
 # Terminal 1 - Backend (port 5000)
@@ -99,7 +101,7 @@ cd frontend
 npm run dev
 ```
 
-### 4. Access the App
+### 6. Access the App
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000/api

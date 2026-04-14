@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import ProductCard from '@/components/ProductCard';
 import { productAPI, categoryAPI } from '@/lib/api';
 import styles from './page.module.css';
@@ -33,12 +34,6 @@ export default function HomePage() {
     }
   };
 
-  const heroProducts = [
-    { img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800', title: 'Glow Up Collection' },
-    { img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800', title: 'Premium Makeup' },
-    { img: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800', title: 'Skincare Essentials' }
-  ];
-
   const defaultCategories = [
     { name: 'Skincare', slug: 'skincare', image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400', _count: { products: 12 } },
     { name: 'Makeup', slug: 'makeup', image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400', _count: { products: 18 } },
@@ -63,30 +58,66 @@ export default function HomePage() {
   const displayFeatured = featuredProducts.length > 0 ? featuredProducts : defaultProducts;
   const displayNew = newArrivals.length > 0 ? newArrivals : defaultProducts.slice(0, 4);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
-    <div className={styles.home}>
+    <div className={`${styles.home} bg-mesh`}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
-          <span className={styles.heroTag}>✨ New Collection 2026</span>
-          <h1 className={styles.heroTitle}>
+          <motion.span 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={styles.heroTag}
+          >
+            ✨ New Collection 2026
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className={styles.heroTitle}
+          >
             Discover Your
             <span className={styles.heroHighlight}> True Beauty</span>
-          </h1>
-          <p className={styles.heroDesc}>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className={styles.heroDesc}
+          >
             Premium skincare, makeup, and beauty essentials curated for the modern woman. 
             Unlock your glow with our exclusive collection.
-          </p>
-          <div className={styles.heroBtns}>
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className={styles.heroBtns}
+          >
             <Link href="/products" className="btn btn-primary btn-lg">
               Shop Now →
             </Link>
             <Link href="/products?featured=true" className="btn btn-outline btn-lg">
               Featured Collection
             </Link>
-          </div>
-          <div className={styles.heroStats}>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className={styles.heroStats}
+          >
             <div className={styles.stat}>
               <span className={styles.statNum}>500+</span>
               <span className={styles.statLabel}>Products</span>
@@ -99,100 +130,127 @@ export default function HomePage() {
               <span className={styles.statNum}>100%</span>
               <span className={styles.statLabel}>Authentic</span>
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className={styles.heroImages}>
-          <div className={styles.heroImageMain}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className={styles.heroImageMain}
+          >
             <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600" alt="Beauty Products" />
-          </div>
-          <div className={styles.heroImageFloat1}>
+          </motion.div>
+          <motion.div 
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className={styles.heroImageFloat1}
+          >
             <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300" alt="Lipstick" />
-          </div>
-          <div className={styles.heroImageFloat2}>
+          </motion.div>
+          <motion.div 
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className={styles.heroImageFloat2}
+          >
             <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300" alt="Serum" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Bar */}
       <section className={styles.features}>
         <div className={styles.container}>
-          <div className={styles.featureGrid}>
-            <div className={styles.feature}>
-              <span className={styles.featureIcon}>🚚</span>
-              <div>
-                <h4>Free Shipping</h4>
-                <p>On orders above ₹499</p>
-              </div>
-            </div>
-            <div className={styles.feature}>
-              <span className={styles.featureIcon}>🔒</span>
-              <div>
-                <h4>Secure Payment</h4>
-                <p>100% secure checkout</p>
-              </div>
-            </div>
-            <div className={styles.feature}>
-              <span className={styles.featureIcon}>↩️</span>
-              <div>
-                <h4>Easy Returns</h4>
-                <p>30-day return policy</p>
-              </div>
-            </div>
-            <div className={styles.feature}>
-              <span className={styles.featureIcon}>✅</span>
-              <div>
-                <h4>100% Authentic</h4>
-                <p>Genuine products only</p>
-              </div>
-            </div>
-          </div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className={styles.featureGrid}
+          >
+            {[
+              { icon: '🚚', title: 'Free Shipping', text: 'On orders above ₹499' },
+              { icon: '🔒', title: 'Secure Payment', text: '100% secure checkout' },
+              { icon: '↩️', title: 'Easy Returns', text: '30-day return policy' },
+              { icon: '✅', title: '100% Authentic', text: 'Genuine products only' }
+            ].map((f, i) => (
+              <motion.div key={i} variants={itemVariants} className={styles.feature}>
+                <span className={styles.featureIcon}>{f.icon}</span>
+                <div>
+                  <h4>{f.title}</h4>
+                  <p>{f.text}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Categories */}
       <section className={styles.section}>
         <div className={styles.container}>
-          <div className="section-header">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="section-header"
+          >
             <h2>Shop by Category</h2>
             <p className="section-subtitle">Explore our curated beauty categories</p>
-          </div>
-          <div className={styles.categoryGrid}>
+          </motion.div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className={styles.categoryGrid}
+          >
             {displayCategories.map((cat, i) => (
-              <Link 
-                key={cat.slug || i} 
-                href={`/products?category=${cat.slug}`}
-                className={styles.categoryCard}
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                <div className={styles.categoryImage}>
-                  <img src={cat.image || 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400'} alt={cat.name} />
-                  <div className={styles.categoryOverlay}></div>
-                </div>
-                <div className={styles.categoryInfo}>
-                  <h3>{cat.name}</h3>
-                  <span>{cat._count?.products || 0} Products</span>
-                </div>
-              </Link>
+              <motion.div key={cat.slug || i} variants={itemVariants}>
+                <Link 
+                  href={`/products?category=${cat.slug}`}
+                  className={styles.categoryCard}
+                >
+                  <div className={styles.categoryImage}>
+                    <img src={cat.image || 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400'} alt={cat.name} />
+                    <div className={styles.categoryOverlay}></div>
+                  </div>
+                  <div className={styles.categoryInfo}>
+                    <h3>{cat.name}</h3>
+                    <span>{cat._count?.products || 0} Products</span>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className={styles.section} style={{ background: 'var(--gray-50)' }}>
+      <section className={styles.section} style={{ background: 'rgba(255, 255, 255, 0.5)', backdropFilter: 'blur(10px)' }}>
         <div className={styles.container}>
-          <div className="section-header">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="section-header"
+          >
             <h2>Featured Products</h2>
             <p className="section-subtitle">Handpicked bestsellers loved by our community</p>
-          </div>
-          <div className={styles.productGrid}>
+          </motion.div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className={styles.productGrid}
+          >
             {displayFeatured.slice(0, 8).map((product, i) => (
-              <div key={product.id || i} style={{ animationDelay: `${i * 0.05}s` }}>
+              <motion.div key={product.id || i} variants={itemVariants}>
                 <ProductCard product={product} />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className={styles.viewAll}>
             <Link href="/products" className="btn btn-outline">View All Products →</Link>
           </div>
@@ -201,33 +259,56 @@ export default function HomePage() {
 
       {/* Promo Banner */}
       <section className={styles.promo}>
-        <div className={styles.promoContent}>
+        <motion.div 
+          initial={{ x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className={styles.promoContent}
+        >
           <span className={styles.promoTag}>Limited Time Offer</span>
           <h2>Up to 40% Off on Skincare</h2>
           <p>Transform your skincare routine with our premium collection. Use code GLAM20 at checkout.</p>
           <Link href="/products?category=skincare" className="btn btn-primary btn-lg">
             Shop Skincare →
           </Link>
-        </div>
-        <div className={styles.promoImage}>
+        </motion.div>
+        <motion.div 
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className={styles.promoImage}
+        >
           <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600" alt="Skincare Promo" />
-        </div>
+        </motion.div>
       </section>
 
       {/* New Arrivals */}
       <section className={styles.section}>
         <div className={styles.container}>
-          <div className="section-header">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="section-header"
+          >
             <h2>New Arrivals</h2>
             <p className="section-subtitle">Fresh drops you don&apos;t want to miss</p>
-          </div>
-          <div className={styles.productGrid} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+          </motion.div>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className={styles.productGrid}
+          >
             {displayNew.slice(0, 4).map((product, i) => (
-              <div key={product.id || i} style={{ animationDelay: `${i * 0.05}s` }}>
+              <motion.div key={product.id || i} variants={itemVariants}>
                 <ProductCard product={product} />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -243,11 +324,18 @@ export default function HomePage() {
               { name: 'Riya M.', text: 'I love the curated collection. Every product I have ordered has been top quality. The Midnight Rose perfume is my absolute favorite!', rating: 5 },
               { name: 'Meera K.', text: 'Best beauty shopping experience online. The packaging is beautiful and the Hyaluronic Acid serum is a game changer for my skin.', rating: 5 }
             ].map((t, i) => (
-              <div key={i} className={styles.testimonialCard}>
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+                className={styles.testimonialCard}
+              >
                 <div className={styles.testimonialStars}>{'★'.repeat(t.rating)}</div>
                 <p className={styles.testimonialText}>&ldquo;{t.text}&rdquo;</p>
                 <p className={styles.testimonialName}>{t.name}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -256,12 +344,18 @@ export default function HomePage() {
       {/* CTA */}
       <section className={styles.cta}>
         <div className={styles.container}>
-          <h2>Join the Cosmique Family</h2>
-          <p>Sign up for exclusive offers, beauty tips, and new product launches.</p>
-          <div className={styles.ctaForm}>
-            <input type="email" placeholder="Enter your email" className={styles.ctaInput} />
-            <button className="btn btn-primary btn-lg">Subscribe</button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2>Join the Cosmique Family</h2>
+            <p>Sign up for exclusive offers, beauty tips, and new product launches.</p>
+            <div className={styles.ctaForm}>
+              <input type="email" placeholder="Enter your email" className={styles.ctaInput} />
+              <button className="btn btn-primary btn-lg">Subscribe</button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

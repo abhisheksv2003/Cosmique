@@ -198,7 +198,7 @@ const getLowStockProducts = async (req, res, next) => {
     const products = await prisma.product.findMany({
       where: {
         isActive: true,
-        stock: { lte: prisma.product.fields ? 5 : 5 }
+        stock: { lte: 5 }
       },
       select: {
         id: true,
@@ -213,7 +213,6 @@ const getLowStockProducts = async (req, res, next) => {
       take: 20
     });
 
-    // Filter where stock <= lowStockAlert (do it in JS since Prisma doesn't support field comparison easily)
     res.json({ products });
   } catch (error) {
     next(error);

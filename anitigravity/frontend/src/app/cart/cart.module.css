@@ -7,7 +7,7 @@
 .layout { display: grid; grid-template-columns: 1fr 380px; gap: var(--space-2xl); align-items: start; }
 
 /* Cart Items */
-.cartItems { display: flex;}
+.cartItems { display: flex; flex-direction: column; }
 .cartHeader { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--space-md); border-bottom: 1px solid var(--gray-200); margin-bottom: var(--space-lg); font-size: 0.875rem; color: var(--gray-500); }
 .clearBtn { background: none; border: none; color: var(--error); font-size: 0.8125rem; font-weight: 500; cursor: pointer; }
 .clearBtn:hover { text-decoration: underline; }

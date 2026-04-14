@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 
 // Auth Context
 const AuthContext = createContext(null);
@@ -39,24 +39,24 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = (userData, accessToken, refreshToken) => {
+  const login = useCallback((userData, accessToken, refreshToken) => {
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     dispatch({ type: 'SET_USER', payload: userData });
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     dispatch({ type: 'LOGOUT' });
-  };
+  }, []);
 
-  const updateUser = (userData) => {
+  const updateUser = useCallback((userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
     dispatch({ type: 'SET_USER', payload: userData });
-  };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ ...state, login, logout, updateUser }}>
@@ -94,9 +94,9 @@ export function CartProvider({ children }) {
     loading: false
   });
 
-  const setCart = (data) => dispatch({ type: 'SET_CART', payload: data });
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
-  const setLoading = (val) => dispatch({ type: 'SET_LOADING', payload: val });
+  const setCart = useCallback((data) => dispatch({ type: 'SET_CART', payload: data }), []);
+  const clearCart = useCallback(() => dispatch({ type: 'CLEAR_CART' }), []);
+  const setLoading = useCallback((val) => dispatch({ type: 'SET_LOADING', payload: val }), []);
 
   return (
     <CartContext.Provider value={{ ...state, setCart, clearCart, setLoading }}>

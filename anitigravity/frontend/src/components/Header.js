@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AppContext';
 import { useCart } from '@/context/AppContext';
 import { cartAPI } from '@/lib/api';
@@ -33,7 +34,7 @@ export default function Header() {
     if (isAuthenticated) {
       cartAPI.getCart().then(res => setCart(res.data)).catch(() => {});
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, setCart]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -61,7 +62,13 @@ export default function Header() {
       {/* Top Bar */}
       <div className={styles.topBar}>
         <div className={styles.topBarContent}>
-          <span>✨ Free shipping on orders above ₹499 | Use code WELCOME10 for 10% off</span>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            ✨ Free shipping on orders above ₹499 | Use code WELCOME10 for 10% off
+          </motion.span>
           <div className={styles.topBarLinks}>
             <Link href="/products">Shop</Link>
             <Link href="/about">About</Link>
@@ -86,7 +93,12 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <span className={styles.logoIcon}>💎</span>
+            <motion.span 
+              whileHover={{ scale: 1.2, rotate: 10 }}
+              className={styles.logoIcon}
+            >
+              💎
+            </motion.span>
             <span className={styles.logoText}>Cosmique</span>
           </Link>
 
@@ -195,12 +207,18 @@ export default function Header() {
             {isAuthenticated ? (
               <>
                 <Link href="/wishlist" className={styles.actionBtn} title="Wishlist">
-                  <span>♥</span>
+                  <motion.span whileHover={{ scale: 1.2 }}>♥</motion.span>
                 </Link>
                 <Link href="/cart" className={styles.actionBtn} title="Cart">
-                  <span>🛒</span>
+                  <motion.span whileHover={{ scale: 1.2 }}>🛒</motion.span>
                   {cartCount > 0 && (
-                    <span className={styles.cartBadge}>{cartCount}</span>
+                    <motion.span 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className={styles.cartBadge}
+                    >
+                      {cartCount}
+                    </motion.span>
                   )}
                 </Link>
                 <div className={styles.profileWrapper} ref={profileRef}>
@@ -212,36 +230,43 @@ export default function Header() {
                       {user?.firstName?.[0]}{user?.lastName?.[0]}
                     </span>
                   </button>
-                  {profileOpen && (
-                    <div className={styles.dropdown}>
-                      <div className={styles.dropdownHeader}>
-                        <p className={styles.dropdownName}>{user?.firstName} {user?.lastName}</p>
-                        <p className={styles.dropdownEmail}>{user?.email}</p>
-                      </div>
-                      <div className={styles.dropdownDivider}></div>
-                      <Link href="/profile" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
-                        👤 My Profile
-                      </Link>
-                      <Link href="/orders" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
-                        📦 My Orders
-                      </Link>
-                      <Link href="/wishlist" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
-                        ♥ Wishlist
-                      </Link>
-                      {user?.role === 'ADMIN' && (
-                        <Link href="/admin" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
-                          ⚙️ Admin Dashboard
-                        </Link>
-                      )}
-                      <div className={styles.dropdownDivider}></div>
-                      <button
-                        className={styles.dropdownItem}
-                        onClick={() => { logout(); setProfileOpen(false); }}
+                  <AnimatePresence>
+                    {profileOpen && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className={styles.dropdown}
                       >
-                        🚪 Logout
-                      </button>
-                    </div>
-                  )}
+                        <div className={styles.dropdownHeader}>
+                          <p className={styles.dropdownName}>{user?.firstName} {user?.lastName}</p>
+                          <p className={styles.dropdownEmail}>{user?.email}</p>
+                        </div>
+                        <div className={styles.dropdownDivider}></div>
+                        <Link href="/profile" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
+                          👤 My Profile
+                        </Link>
+                        <Link href="/orders" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
+                          📦 My Orders
+                        </Link>
+                        <Link href="/wishlist" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
+                          ♥ Wishlist
+                        </Link>
+                        {user?.role === 'ADMIN' && (
+                          <Link href="/admin" className={styles.dropdownItem} onClick={() => setProfileOpen(false)}>
+                            ⚙️ Admin Dashboard
+                          </Link>
+                        )}
+                        <div className={styles.dropdownDivider}></div>
+                        <button
+                          className={styles.dropdownItem}
+                          onClick={() => { logout(); setProfileOpen(false); }}
+                        >
+                          🚪 Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </>
             ) : (

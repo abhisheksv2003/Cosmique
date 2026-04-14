@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AppContext';
 import { useCart } from '@/context/AppContext';
 import { cartAPI } from '@/lib/api';
 import styles from './cart.module.css';
+import toast from 'react-hot-toast';
 
 export default function CartPage() {
   const { isAuthenticated } = useAuth();
@@ -30,7 +31,10 @@ export default function CartPage() {
     try {
       await cartAPI.updateItem(itemId, { quantity: newQty });
       await fetchCart();
-    } catch (err) { alert(err.response?.data?.error || 'Error updating'); }
+      toast.success('Cart updated');
+    } catch (err) { 
+      toast.error(err.response?.data?.error || 'Error updating'); 
+    }
     finally { setUpdating(null); }
   };
 

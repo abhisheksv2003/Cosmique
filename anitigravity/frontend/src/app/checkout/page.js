@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AppContext';
 import { useCart } from '@/context/AppContext';
 import { cartAPI, authAPI, orderAPI } from '@/lib/api';
 import styles from './checkout.module.css';
+import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
   const { user, isAuthenticated } = useAuth();
@@ -47,13 +48,14 @@ export default function CheckoutPage() {
       setSelectedAddress(data.address.id);
       setNewAddress(false);
       setAddressForm({ fullName: '', phone: '', street: '', city: '', state: '', zipCode: '' });
+      toast.success('Address added successfully');
     } catch (err) {
-      alert(err.response?.data?.error || 'Failed to add address');
+      toast.error(err.response?.data?.error || 'Failed to add address');
     }
   };
 
   const handlePlaceOrder = async () => {
-    if (!selectedAddress) { alert('Please select a delivery address'); return; }
+    if (!selectedAddress) { toast.error('Please select a delivery address'); return; }
     setPlacing(true);
     try {
       const { data } = await orderAPI.createOrder({
@@ -62,8 +64,9 @@ export default function CheckoutPage() {
       });
       clearCart();
       setOrderSuccess(data.order);
+      toast.success('Order placed successfully!');
     } catch (err) {
-      alert(err.response?.data?.error || 'Failed to place order');
+      toast.error(err.response?.data?.error || 'Failed to place order');
     } finally {
       setPlacing(false);
     }
