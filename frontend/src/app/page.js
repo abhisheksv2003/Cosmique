@@ -169,13 +169,12 @@ export default function HomePage() {
             className={styles.featureGrid}
           >
             {[
-              { icon: '🚚', title: 'Free Shipping', text: 'On orders above ₹499' },
-              { icon: '🔒', title: 'Secure Payment', text: '100% secure checkout' },
-              { icon: '↩️', title: 'Easy Returns', text: '30-day return policy' },
-              { icon: '✅', title: '100% Authentic', text: 'Genuine products only' }
+              { title: 'Free Shipping', text: 'On orders above ₹499' },
+              { title: 'Secure Payment', text: '100% secure checkout' },
+              { title: 'Easy Returns', text: '30-day return policy' },
+              { title: '100% Authentic', text: 'Genuine products only' }
             ].map((f, i) => (
               <motion.div key={i} variants={itemVariants} className={styles.feature}>
-                <span className={styles.featureIcon}>{f.icon}</span>
                 <div>
                   <h4>{f.title}</h4>
                   <p>{f.text}</p>
